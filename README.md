@@ -2,7 +2,6 @@
 
 Expressを起動する
 ```
-cd backend
 npm start
 ```
 Reactをスタートする
