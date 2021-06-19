@@ -7,7 +7,9 @@ app.get('/', (req: express.Request, res: express.Response) => {
 })
 
 app.get('/api', (req: express.Request, res: express.Response) => {
-    res.json({ message: "Hello World!aaa"});
+    setTimeout(() => {
+        res.json({ message: "Hello World!aaa"});
+    }, 1000)
 })
 
 app.listen(port, () => {
