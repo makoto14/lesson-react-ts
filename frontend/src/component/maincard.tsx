@@ -1,6 +1,9 @@
 import React from 'react';
 import { Paper, makeStyles, Button } from "@material-ui/core";
 import CircularIndeterminate from './loader';
+import { useSelector, useDispatch } from "react-redux";
+import { getGeneration, changeGeneration } from "../store/generation";
+import { getSearch, changeSearch } from "../store/searchStore";
 
 // スタイルの記述をする
 const useStyles = makeStyles(theme => ({
@@ -30,6 +33,13 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column",
         margin: "16px",
     },
+
+    buttonArea: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        margin: "16px",
+    },
 }));
 
 const MainCard = () => {
@@ -37,19 +47,20 @@ const MainCard = () => {
     const classes = useStyles();
     const [message, setMessage] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(true);
-    const [hoge, setHoge] = React.useState('');
-    let [clickCount, setCount] = React.useState(0);
+    let generation: number = useSelector(getGeneration);
+    let search: String = useSelector(getSearch);
+    const dispatch = useDispatch();
 
     const addCount = (): void => {
-        setHoge("hoge");
-        setCount(clickCount += 1);
+        dispatch(changeGeneration(generation += 1));
+        dispatch(changeSearch('add'));
         setIsLoading(true);
         reRequst();
     }
 
     const minusCount = (): void => {
-        setHoge("");
-        setCount(clickCount += -1);
+        dispatch(changeGeneration(generation += -1));
+        dispatch(changeSearch('minus'));
     }
 
     const reRequst = (): void => {
@@ -66,12 +77,14 @@ const MainCard = () => {
     return (
         <div className={classes.outer}>
             <Paper className={classes.inner}>
-                <Button color="primary" onClick={minusCount}>Minus</Button>
-                <Button variant="contained" onClick={addCount}>Add</Button>
                 <div className={classes.message}>
                     <div className={classes.message}>{isLoading ? <CircularIndeterminate></CircularIndeterminate> : message}</div>
-                    <div className={classes.message}>{hoge}</div>
-                    <div className={classes.message}>Click count : {clickCount}</div>
+                    <div className={classes.message}>Click count : {generation}</div>
+                    <div className={classes.message}>Search input : {search}</div>
+                </div>
+                <div className={classes.buttonArea}>
+                    <Button color="primary" onClick={minusCount}>Minus</Button>
+                    <Button variant="contained" onClick={addCount}>Add</Button>
                 </div>
             </Paper>
         </div>

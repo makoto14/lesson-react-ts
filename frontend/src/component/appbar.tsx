@@ -4,12 +4,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SideMenu from './sidemenu';
+import { changeSearch, getSearch } from '../store/searchStore';
+import { useSelector, useDispatch } from "react-redux";
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -74,8 +76,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PrimarySearchAppBar() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
     const isMenuOpen = Boolean(anchorEl);
+    const dispatch = useDispatch();
+    let state = {
+        search: ''
+    };
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -84,6 +89,11 @@ export default function PrimarySearchAppBar() {
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
+
+    const handleSearch = (event: any) => {
+        dispatch(changeSearch(event.target.search));
+        // dispatch(changeSearch('hoge'));
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -113,13 +123,11 @@ export default function PrimarySearchAppBar() {
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
+                        <TextField
+                        id="standard-basic"
+                        label="Search"
+                        // value={state.search}
+                        onChange={handleSearch}
                         />
                     </div>
                     <div className={classes.grow} />

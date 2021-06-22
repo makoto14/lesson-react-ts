@@ -7,16 +7,20 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
+import { store } from './store/store';
+import { Provider } from 'react-redux';
 
 function App() {
 
   return (
     <div className="App">
       <Router>
-        <PrimarySearchAppBar></PrimarySearchAppBar>
-        <Switch>
-          <Route path='/hoge' component={MainCard} />
-        </Switch>
+        <Provider store={store}>
+          <PrimarySearchAppBar></PrimarySearchAppBar>
+          <Switch>
+              <Route path='/hoge' component={MainCard} />  
+          </Switch>
+        </Provider>
       </Router>
       
     </div>
