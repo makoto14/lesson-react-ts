@@ -65,7 +65,7 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(false)}
         >
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                {['Inbox', 'Starred'].map((text, index) => (
                     <ListItem button key={text} onClick={() => handleLink('/hoge')}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
@@ -75,7 +75,7 @@ export default function TemporaryDrawer() {
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                {['All mail', 'Trash'].map((text, index) => (
                     <ListItem button key={text} onClick={() => handleLink('/')}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />

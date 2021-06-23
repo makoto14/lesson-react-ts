@@ -9,8 +9,8 @@ import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import SideMenu from './sidemenu';
-import { changeSearch, getSearch } from '../store/searchStore';
-import { useSelector, useDispatch } from "react-redux";
+import { changeSearch } from '../store/searchStore';
+import { useDispatch } from "react-redux";
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,11 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         search: {
             position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
             borderRadius: theme.shape.borderRadius,
-            backgroundColor: fade(theme.palette.common.white, 0.15),
-            '&:hover': {
-                backgroundColor: fade(theme.palette.common.white, 0.25),
-            },
+            backgroundColor: fade(theme.palette.common.white, 0.40),
             marginRight: theme.spacing(2),
             marginLeft: 0,
             width: '100%',
@@ -45,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) =>
         searchIcon: {
             padding: theme.spacing(0, 2),
             height: '100%',
-            position: 'absolute',
             pointerEvents: 'none',
             display: 'flex',
             alignItems: 'center',
@@ -78,9 +76,6 @@ export default function PrimarySearchAppBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const isMenuOpen = Boolean(anchorEl);
     const dispatch = useDispatch();
-    let state = {
-        search: ''
-    };
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -91,8 +86,7 @@ export default function PrimarySearchAppBar() {
     };
 
     const handleSearch = (event: any) => {
-        dispatch(changeSearch(event.target.search));
-        // dispatch(changeSearch('hoge'));
+        dispatch(changeSearch(event.target.value));
     }
 
     const menuId = 'primary-search-account-menu';
@@ -126,7 +120,7 @@ export default function PrimarySearchAppBar() {
                         <TextField
                         id="standard-basic"
                         label="Search"
-                        // value={state.search}
+                        color="primary"
                         onChange={handleSearch}
                         />
                     </div>
