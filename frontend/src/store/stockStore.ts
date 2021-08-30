@@ -2,27 +2,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
 type Generation = {
-    search: String
+    stcok: any
 }
 
 const initialState: Generation = {
-    search: ''
+    stcok: null
 }
 
 export const generationSlice = createSlice({
-    name: 'searchStore',
+    name: 'stockStore',
     initialState,
     reducers: {
         changeGeneration: (state, action) => {
-            state.search = action.payload;
+            state.stcok = action.payload;
         },
     },
 })
 
 // change
-export const { changeGeneration: changeSearch } = generationSlice.actions;
+export const { changeGeneration: changeStock } = generationSlice.actions;
 
 // get
-export const getSearch = (state: RootState) => state.searchReducer.search;
+export const getStock = (state: RootState) => state.stockReducer.stcok;
 
 export default generationSlice.reducer

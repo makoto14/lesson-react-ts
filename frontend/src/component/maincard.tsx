@@ -4,6 +4,7 @@ import CircularIndeterminate from './loader';
 import { useSelector, useDispatch } from "react-redux";
 import { getGeneration, changeGeneration } from "../store/generation";
 import { getSearch, changeSearch } from "../store/searchStore";
+import { getStock, changeStock } from '../store/stockStore';
 
 // スタイルの記述をする
 const useStyles = makeStyles(theme => ({
@@ -45,10 +46,11 @@ const useStyles = makeStyles(theme => ({
 const MainCard = () => {
 
     const classes = useStyles();
-    const [message, setMessage] = React.useState('');
+    const [message, setMessage] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(true);
     let generation: number = useSelector(getGeneration);
     let search: String = useSelector(getSearch);
+    let stock: any = useSelector(getStock);
     const dispatch = useDispatch();
 
     const addCount = (): void => {
@@ -64,9 +66,17 @@ const MainCard = () => {
     }
 
     const reRequst = (): void => {
-        fetch(`/api`)
-            .then(res => res.json())
-            .then(data => setMessage(data.message))
+        fetch(`https://raw.githubusercontent.com/makoto14/lesson-python/main/asset/stock_data/data.json`)
+            .then(res => {
+                const json = res.json();
+                return json;
+            })
+            .then(res => {
+                const json = JSON.parse(res);
+                console.log(json);
+                setMessage(json);
+                dispatch(changeStock(json));
+            })
             .then(() => setIsLoading(false));
     }
 
@@ -78,7 +88,12 @@ const MainCard = () => {
         <div className={classes.outer}>
             <Paper className={classes.inner}>
                 <div className={classes.message}>
-                    <div className={classes.message}>{isLoading ? <CircularIndeterminate></CircularIndeterminate> : message}</div>
+                    <div className={classes.message}>
+                        {isLoading === null || stock === null ? <CircularIndeterminate></CircularIndeterminate> : JSON.stringify(stock.Open)}
+                    </div>
+                    {/* <ul>
+                        {stock === null ? 'null' :stock.Open.map((value: any) => <li>{value}</li>)}
+                    </ul> */}
                     <div className={classes.message}>Click count : {generation}</div>
                     <div className={classes.message}>Search input : {search}</div>
                 </div>
