@@ -9,6 +9,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import HomeIcon from '@material-ui/icons/Home';
+import DoneIcon from '@material-ui/icons/Done';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory, Link } from 'react-router-dom';
@@ -65,9 +67,9 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(false)}
         >
             <List>
-                {['Inbox', 'Starred'].map((text, index) => (
-                    <ListItem button key={text} onClick={() => handleLink('/hoge')}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                {['Home'].map((text, index) => (
+                    <ListItem button key={text} onClick={() => handleLink('/')}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                     
@@ -75,11 +77,22 @@ export default function TemporaryDrawer() {
             </List>
             <Divider />
             <List>
-                {['All mail', 'Trash'].map((text, index) => (
-                    <ListItem button key={text} onClick={() => handleLink('/')}>
+                {['Todo'].map((text, index) => (
+                    <ListItem button key={text} onClick={() => handleLink('/todo')}>
+                        <ListItemIcon><DoneIcon /></ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                    
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['Hoge', 'Hoge2'].map((text, index) => (
+                    <ListItem button key={text} onClick={() => handleLink('/hoge')}>
                         <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
+                    
                 ))}
             </List>
         </div>

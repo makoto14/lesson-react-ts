@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
+import TodoCard from './component/todo';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
         <Provider store={store}>
           <PrimarySearchAppBar></PrimarySearchAppBar>
           <Switch>
-              <Route path='/hoge' component={MainCard} />  
+              <Route path='/hoge' component={MainCard} />
+              <Route path='/todo' component={TodoCard} />
           </Switch>
         </Provider>
       </Router>
