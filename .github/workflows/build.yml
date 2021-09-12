@@ -3,7 +3,7 @@ name: Build frontend
 on:
   push:
     branches: 
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -33,5 +33,5 @@ jobs:
         run: |
           git add .
           git commit -m "run build"
-          git pull origin master
-          git push origin master
+          git pull
+          git push origin main
