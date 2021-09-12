@@ -33,5 +33,5 @@ jobs:
         run: |
           git add .
           git commit -m "run build"
-          git pull
+          git pull origin main
           git push origin main

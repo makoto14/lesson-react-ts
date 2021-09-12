@@ -13,7 +13,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import DoneIcon from '@material-ui/icons/Done';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useHistory, Link } from 'react-router-dom';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import { useHistory } from 'react-router-dom';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -80,6 +81,16 @@ export default function TemporaryDrawer() {
                 {['Todo'].map((text, index) => (
                     <ListItem button key={text} onClick={() => handleLink('/todo')}>
                         <ListItemIcon><DoneIcon /></ListItemIcon>
+                        <ListItemText primary={text} />
+                    </ListItem>
+                    
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {['Shopping'].map((text, index) => (
+                    <ListItem button key={text} onClick={() => handleLink('/shopping')}>
+                        <ListItemIcon><ShoppingCart /></ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                     

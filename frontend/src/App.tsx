@@ -10,6 +10,7 @@ import {
 import { store } from './store/store';
 import { Provider } from 'react-redux';
 import TodoCard from './component/todo';
+import ShoppingMain from './component/shopping/shoppingMain';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Switch>
               <Route path='/hoge' component={MainCard} />
               <Route path='/todo' component={TodoCard} />
+              <Route path='/shopping' component={ShoppingMain} />
           </Switch>
         </Provider>
       </Router>
