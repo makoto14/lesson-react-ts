@@ -23,6 +23,8 @@ jobs:
         run: |
           cd frontend
           npm run build
+        env:
+          CI: false
       - name: git setting
         run: |
           git config --global user.name "makoto14"
