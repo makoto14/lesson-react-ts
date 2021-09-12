@@ -1,0 +1,33 @@
+name: Action Sample
+
+on:
+  push:
+    branches: 
+      - master
+  workflow_dispatch:
+
+jobs:
+  numpy-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install Dependencies
+        run: |
+          cd frontend
+          npm install
+      - name: Run Build
+        run: npm run build
+      - name: git setting
+        run: |
+          git config --global user.name "makoto14"
+          git config --global user.email "${{secrets.E_MAIL}}"
+      - name: Commit files
+        run: |
+          git add .
+          git commit -m "run build"
+          git pull
+          git push origin main
