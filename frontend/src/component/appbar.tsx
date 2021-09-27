@@ -12,6 +12,7 @@ import SideMenu from './sidemenu';
 import { changeSearch } from '../store/searchStore';
 import { useDispatch } from "react-redux";
 import TextField from '@material-ui/core/TextField';
+import ShoppingCart from './shopping/ShoppingCart';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -118,14 +119,15 @@ export default function PrimarySearchAppBar() {
                             <SearchIcon />
                         </div>
                         <TextField
-                        id="standard-basic"
-                        label="Search"
-                        color="primary"
-                        onChange={handleSearch}
+                            id="standard-basic"
+                            label="Search"
+                            color="primary"
+                            onChange={handleSearch}
                         />
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
+                        <ShoppingCart　/>
                         <IconButton
                             edge="end"
                             aria-label="account of current user"

@@ -31,7 +31,8 @@ export function ShoppingItemCard(props: any) {
 
     const addCart = (id: number) => () =>  {
         const item: ShoppingCartItemType = {
-            id: id
+            id: id,
+            count: 1
         }
         dispatch(addCartStore(item))
     }

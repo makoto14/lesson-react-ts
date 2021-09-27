@@ -91,9 +91,6 @@ const MainCard = () => {
                     <div className={classes.message}>
                         {isLoading === null || stock === null ? <CircularIndeterminate></CircularIndeterminate> : JSON.stringify(stock.Open)}
                     </div>
-                    {/* <ul>
-                        {stock === null ? 'null' :stock.Open.map((value: any) => <li>{value}</li>)}
-                    </ul> */}
                     <div className={classes.message}>Click count : {generation}</div>
                     <div className={classes.message}>Search input : {search}</div>
                 </div>
